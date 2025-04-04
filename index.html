@@ -1,1153 +1,535 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Farhan Siddiqui</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-  <style>
-    /* Root variables */
-    :root {
-      --primary: #2c3e50;
-      --secondary: #3498db;
-      --accent: #e74c3c;
-      --light: #ecf0f1;
-      --dark: #1a252f;
-      --text: #333;
-      --success: #2ecc71;
-    }
-    
-    /* Global styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    body {
-      color: var(--text);
-      background-color: var(--light);
-      line-height: 1.6;
-    }
-    a {
-      text-decoration: none;
-      color: var(--secondary);
-      transition: color 0.3s;
-    }
-    a:hover {
-      color: var(--accent);
-    }
-    .container {
-      width: 90%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-    
-    /* Header Styles */
-    header {
-      background-color: var(--primary);
-      color: white;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 0;
-    }
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-      color: white;
-      display: flex;
-      align-items: center;
-    }
-    .logo i {
-      margin-right: 10px;
-      color: var(--secondary);
-    }
-    .nav-links {
-      display: flex;
-      list-style: none;
-    }
-    .nav-links li {
-      margin-left: 30px;
-    }
-    .nav-links a {
-      color: white;
-      font-weight: 500;
-      position: relative;
-    }
-    .nav-links a:after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: -5px;
-      left: 0;
-      background-color: var(--accent);
-      transition: width 0.3s;
-    }
-    .nav-links a:hover:after {
-      width: 100%;
-    }
-    .hamburger {
-      display: none;
-      cursor: pointer;
-      font-size: 24px;
-    }
-    
-    /* Landing Section Styles */
-    #landing {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      overflow: hidden;
-    }
-    #particles-js {
-      position: absolute;
-      width: 100vw;
-      height: 100vh;
-      background-color: white;
-      z-index: -1;
-    }
-    .landing-content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #000;
-      text-align: center;
-      z-index: 10;
-    }
-    .landing-content h1 {
-      font-size: 3em;
-      margin: 0;
-      font-weight: bold;
-    }
-    .landing-content p {
-      font-size: 1.2em;
-      margin-top: 10px;
-    }
-    .landing-content .btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 10px 20px;
-      font-size: 1.2em;
-      color: white;
-      background-color: black;
-      text-decoration: none;
-      border-radius: 5px;
-      transition: 0.3s;
-    }
-    .landing-content .btn:hover {
-      background-color: #333;
-    }
-    
-    /* Section Styles */
-    .section {
-      padding: 100px 0;
-    }
-    .section-title {
-      text-align: center;
-      margin-bottom: 60px;
-      font-size: 2.5rem;
-      position: relative;
-    }
-    .section-title:after {
-      content: '';
-      display: block;
-      width: 70px;
-      height: 4px;
-      background-color: var(--secondary);
-      margin: 15px auto 0;
-    }
-    
-    /* About Section */
-    .about-content {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 50px;
-    }
-    .about-text {
-      flex: 1;
-    }
-    .about-text h3 {
-      font-size: 1.8rem;
-      margin-bottom: 20px;
-      color: var(--primary);
-    }
-    .about-image {
-      flex: 1;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-    }
-    .about-image img {
-      width: 100%;
-      height: auto;
-      display: block;
-      transition: transform 0.5s;
-    }
-    .about-image:hover img {
-      transform: scale(1.05);
-    }
-    
-    /* Expertise Section */
-    .expertise {
-      background-color: var(--primary);
-      color: white;
-    }
-    .expertise .section-title:after {
-      background-color: var(--accent);
-    }
-    .expertise-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 30px;
-    }
-    .expertise-card {
-      background-color: rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      padding: 30px;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .expertise-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-    }
-    .expertise-card i {
-      font-size: 40px;
-      color: var(--secondary);
-      margin-bottom: 20px;
-      display: block;
-    }
-    .expertise-card h3 {
-      font-size: 1.5rem;
-      margin-bottom: 15px;
-    }
-    
-    /* Projects Section */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 40px;
-    }
-    .project-card {
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      background-color: white;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .project-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-    }
-    .project-image {
-      width: 100%;
-      height: 200px;
-      overflow: hidden;
-    }
-    .project-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s;
-    }
-    .project-card:hover .project-image img {
-      transform: scale(1.1);
-    }
-    .project-info {
-      padding: 25px;
-    }
-    .project-info h3 {
-      font-size: 1.4rem;
-      margin-bottom: 10px;
-      color: var(--primary);
-    }
-    .project-tags {
-      display: flex;
-      flex-wrap: wrap;
-      margin: 15px 0;
-    }
-    .tag {
-      background-color: var(--light);
-      color: var(--primary);
-      padding: 5px 10px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      margin-right: 8px;
-      margin-bottom: 8px;
-    }
-    .project-links {
-      display: flex;
-      gap: 15px;
-      margin-top: 20px;
-    }
-    .live-demo {
-      background-color: var(--secondary);
-      color: white;
-    }
-    .source-code {
-      border: 1px solid var(--secondary);
-      color: var(--secondary);
-    }
-    
-    /* Teaching Section */
-    .teaching {
-      background-color: var(--light);
-    }
-    .methodology-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 30px;
-      margin-bottom: 50px;
-    }
-    .methodology-item {
-      background-color: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-      border-left: 4px solid var(--secondary);
-    }
-    .methodology-item h3 {
-      color: var(--primary);
-      margin-bottom: 15px;
-      font-size: 1.3rem;
-    }
-    .courses {
-      background-color: white;
-      border-radius: 10px;
-      padding: 40px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    }
-    .course-item {
-      padding: 20px 0;
-      border-bottom: 1px solid #eee;
-    }
-    .course-item:last-child {
-      border-bottom: none;
-    }
-    .course-title {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-    }
-    .course-title h3 {
-      color: var(--primary);
-      font-size: 1.2rem;
-    }
-    .course-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease-out;
-    }
-    .course-content p {
-      padding: 20px 0;
-    }
-    .course-item.active .course-content {
-      max-height: 500px;
-      transition: max-height 0.6s ease-in;
-    }
-    .course-title i {
-      transition: transform 0.3s;
-    }
-    .course-item.active .course-title i {
-      transform: rotate(180deg);
-    }
-    
-    /* Experience Section */
-    .experience-timeline {
-      position: relative;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .experience-timeline::before {
-      content: '';
-      position: absolute;
-      width: 4px;
-      background-color: var(--secondary);
-      top: 0;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      border-radius: 2px;
-    }
-    .timeline-item {
-      padding: 20px 40px;
-      position: relative;
-      width: 50%;
-      box-sizing: border-box;
-    }
-    .timeline-item:nth-child(odd) {
-      left: 0;
-    }
-    .timeline-item:nth-child(even) {
-      left: 50%;
-    }
-    .timeline-content {
-      padding: 25px;
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      position: relative;
-    }
-    .timeline-content h3 {
-      margin-bottom: 10px;
-      color: var(--primary);
-      font-size: 1.3rem;
-    }
-    .timeline-content .date {
-      color: var(--secondary);
-      font-weight: 600;
-      margin-bottom: 15px;
-      display: block;
-    }
-    .timeline-content::after {
-      content: '';
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background-color: white;
-      border: 4px solid var(--secondary);
-      border-radius: 50%;
-      top: 20px;
-    }
-    .timeline-item:nth-child(odd) .timeline-content::after {
-      right: -70px;
-    }
-    .timeline-item:nth-child(even) .timeline-content::after {
-      left: -70px;
-    }
-    
-    /* Contact Section */
-    .contact {
-      background-color: var(--dark);
-      color: white;
-    }
-    .contact-content {
-      display: flex;
-      gap: 50px;
-    }
-    .contact-info {
-      flex: 1;
-    }
-    .contact-info h3 {
-      font-size: 1.5rem;
-      margin-bottom: 30px;
-      color: var(--secondary);
-    }
-    .contact-details {
-      margin-bottom: 30px;
-    }
-    .contact-details p {
-      margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-    }
-    .contact-details i {
-      margin-right: 15px;
-      color: var(--secondary);
-      font-size: 20px;
-      width: 30px;
-      text-align: center;
-    }
-    .social-links {
-      display: flex;
-      gap: 15px;
-    }
-    .social-links a {
-      width: 50px;
-      height: 50px;
-      background-color: rgba(255, 255, 255, 0.1);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 20px;
-      transition: all 0.3s;
-    }
-    .social-links a:hover {
-      background-color: var(--secondary);
-      transform: translateY(-5px);
-    }
-    .contact-form {
-      flex: 1;
-      background-color: rgba(255, 255, 255, 0.05);
-      padding: 40px;
-      border-radius: 10px;
-    }
-    .form-group {
-      margin-bottom: 25px;
-    }
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 500;
-    }
-    .form-control {
-      width: 100%;
-      padding: 15px;
-      border: none;
-      border-radius: 5px;
-      background-color: rgba(255, 255, 255, 0.1);
-      color: white;
-      font-size: 16px;
-    }
-    .form-control:focus {
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
-    }
-    textarea.form-control {
-      min-height: 150px;
-      resize: vertical;
-    }
-    .submit-btn {
-      width: 100%;
-      padding: 15px;
-      font-size: 16px;
-      font-weight: 600;
-    }
-    
-    /* Footer */
-    footer {
-      background-color: var(--dark);
-      color: white;
-      padding: 25px 0;
-      text-align: center;
-      font-size: 0.9rem;
-    }
-    footer p {
-      opacity: 0.7;
-    }
-    
-    /* Back to Top Button */
-    .back-to-top {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      width: 50px;
-      height: 50px;
-      background-color: var(--secondary);
-      color: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      cursor: pointer;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s;
-      z-index: 100;
-    }
-    .back-to-top.visible {
-      opacity: 1;
-      visibility: visible;
-    }
-    .back-to-top:hover {
-      background-color: var(--accent);
-      transform: translateY(-5px);
-    }
-    
-    /* Fade-in Animations */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.5s, transform 0.5s;
-    }
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    /* Responsive Styles */
-    @media (max-width: 1024px) {
-      .experience-timeline::before {
-        left: 30px;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farhan Siddiqui - Expert in Data Science, AI, Cybersecurity & Web Development</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+
+    <style>
+      /* Ensure Lucide font is loaded if used via class */
+      @font-face {
+        font-family: 'LucideIcons';
+        src: url(https://cdn.jsdelivr.net/npm/lucide-static@latest/font/Lucide.ttf) format('truetype');
       }
-      .timeline-item {
-        width: 100%;
-        padding-left: 80px;
-        padding-right: 0;
+      .lucide {
+        font-family: 'LucideIcons';
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-rendering: auto;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
-      .timeline-item:nth-child(even) {
-        left: 0;
-      }
-      .timeline-item:nth-child(odd) .timeline-content::after,
-      .timeline-item:nth-child(even) .timeline-content::after {
-        left: -50px;
-      }
-    }
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar { width: 8px; }
+      ::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+      ::-webkit-scrollbar-thumb { background: #888; border-radius: 10px; }
+      ::-webkit-scrollbar-thumb:hover { background: #555; }
+
+      /* Smooth scrolling */
+      html { scroll-behavior: smooth; }
+
+      /* Style for tsParticles container */
+      #tsparticles {
         position: absolute;
-        top: 100%;
+        top: 0;
         left: 0;
         width: 100%;
-        background-color: var(--primary);
-        padding: 20px;
-        flex-direction: column;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        height: 100%;
+        z-index: 0; /* Behind hero content but above hero background/overlay */
+        /* Removed background-color here - relies on hero background/overlay */
       }
-      .nav-links.active {
-        display: flex;
+
+      /* Ensure hero content is above particles */
+      #hero > div.container { /* Target the content container specifically */
+        position: relative;
+        z-index: 1;
       }
-      .nav-links li {
-        margin: 10px 0;
-      }
-      .hamburger {
-        display: block;
-      }
-      .about-content {
-        flex-direction: column;
-      }
-      .contact-content {
-        flex-direction: column;
-      }
-      .projects-grid {
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      }
-    }
-    @media (max-width: 480px) {
-      .section-title {
-        font-size: 2rem;
-      }
-      .btn {
-        display: block;
+
+      /* Optional: Add a subtle overlay to improve text readability over particles */
+      /* This overlay sits between the particles and the text content */
+      #hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
-        margin-bottom: 15px;
+        height: 100%;
+        /* Slightly more opaque overlay */
+        background-color: rgba(249, 250, 251, 0.75);
+        z-index: 0; /* Behind content, potentially above particles if needed, but same level as particles here works */
       }
-      .btn-outline {
-        margin-left: 0;
-      }
-      .landing-content h1 {
-        font-size: 2rem;
-      }
-    }
-  </style>
+
+       /* Ensure the hero section clips its content */
+       #hero {
+         position: relative; /* Needed for absolute positioning of children */
+         overflow: hidden; /* IMPORTANT: This clips the particles */
+       }
+
+    </style>
+    <script>
+        // Tailwind configuration
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#1e40af', // Original Blue
+                        'primary-hover': '#1d4ed8', // Slightly brighter blue for hover/particles
+                        secondary: '#059669', // Emerald
+                        dark: '#111827', // Darker Gray
+                        light: '#f9fafb', // Light Gray
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
-  <!-- Header -->
-  <header>
-    <div class="container">
-      <nav>
-        <a href="#landing" class="logo"><i class="fas fa-brain"></i> Farhan Siddiqui</a>
-        <ul class="nav-links">
-          <li><a href="#landing">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#expertise">Expertise</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#teaching">Teaching</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-        <div class="hamburger">
-          <i class="fas fa-bars"></i>
-        </div>
-      </nav>
-    </div>
-  </header>
+<body class="font-sans bg-light text-dark antialiased">
 
-  <!-- Landing Section (Dynamic Design from chat.html) -->
-  <section id="landing">
-    <div id="particles-js"></div>
-    <div class="landing-content">
-      <h1>Transforming Data into <span class="highlight">Insights</span> & <span class="highlight">Innovation</span></h1>
-        <p>Senior Data Science Faculty & Computer Vision Expert with proven experience in developing cutting-edge AI solutions for real-world problems</p>
-      <a href="#projects" class="btn">View Projects</a>
-    </div>
-  </section>
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-primary hover:text-primary-hover transition duration-300">Farhan Siddiqui</a>
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="#about" class="text-gray-700 hover:text-primary transition duration-300">About</a>
+                <a href="#skills" class="text-gray-700 hover:text-primary transition duration-300">Skills</a>
+                <a href="#projects" class="text-gray-700 hover:text-primary transition duration-300">Projects</a>
+                <a href="#experience" class="text-gray-700 hover:text-primary transition duration-300">Experience</a>
+                <a href="#contact" class="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-hover transition duration-300 text-sm font-medium">Contact Me</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-600 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="md:hidden hidden bg-white pb-4 border-t border-gray-200">
+            <a href="#about" class="block px-6 py-2 text-gray-700 hover:bg-gray-100 hover:text-primary transition duration-300">About</a>
+            <a href="#skills" class="block px-6 py-2 text-gray-700 hover:bg-gray-100 hover:text-primary transition duration-300">Skills</a>
+            <a href="#projects" class="block px-6 py-2 text-gray-700 hover:bg-gray-100 hover:text-primary transition duration-300">Projects</a>
+            <a href="#experience" class="block px-6 py-2 text-gray-700 hover:bg-gray-100 hover:text-primary transition duration-300">Experience</a>
+            <a href="#contact" class="block px-6 py-2 bg-primary text-white text-center rounded-md mx-4 mt-2 hover:bg-primary-hover transition duration-300">Contact Me</a>
+        </div>
+    </header>
 
-  <!-- About Section -->
-  <section id="about" class="section">
-    <div class="container">
-      <h2 class="section-title fade-in" data-aos="fade-up">About Me</h2>
-      <div class="about-content">
-        <div class="about-text fade-in" data-aos="fade-up">
-          <h3>Combining Academic Excellence with Industry Expertise</h3>
-          <p>With over a decade of experience in data science and computer vision, I've dedicated my career to bridging the gap between theoretical research and practical applications. As a senior faculty member, I help shape the next generation of data scientists while maintaining an active role in cutting-edge industry projects.</p>
-          <p>My research focuses on computer vision applications in healthcare, agriculture, and smart cities. I believe in the power of AI to transform industries and improve lives when implemented ethically and responsibly.</p>
-          <p>When I'm not teaching or coding, you'll find me mentoring startups, speaking at tech conferences, or exploring the latest advances in AI research.</p>
-        </div>
-        <div class="about-image fade-in" data-aos="fade-up">
-          <img src="/api/placeholder/600/400" alt="Profile Image" />
-        </div>
-      </div>
-    </div>
-  </section>
+    <main>
 
-  <!-- Expertise Section -->
-  <section id="expertise" class="section expertise">
-    <div class="container">
-      <h2 class="section-title fade-in" data-aos="fade-up">Areas of Expertise</h2>
-      <div class="expertise-grid">
-        <div class="expertise-card fade-in" data-aos="fade-up">
-          <i class="fas fa-eye"></i>
-          <h3>Computer Vision</h3>
-          <p>Specialized in object detection, image segmentation, and visual recognition systems with applications in healthcare diagnostics, autonomous vehicles, and smart surveillance.</p>
-        </div>
-        <div class="expertise-card fade-in" data-aos="fade-up">
-          <i class="fas fa-robot"></i>
-          <h3>Deep Learning</h3>
-          <p>Expert in designing and implementing neural network architectures including CNNs, RNNs, and Transformers for complex pattern recognition and prediction tasks.</p>
-        </div>
-        <div class="expertise-card fade-in" data-aos="fade-up">
-          <i class="fas fa-database"></i>
-          <h3>Big Data Analytics</h3>
-          <p>Proficient in processing and analyzing large-scale datasets using distributed computing frameworks like Spark and cloud-based solutions.</p>
-        </div>
-        <div class="expertise-card fade-in" data-aos="fade-up">
-          <i class="fas fa-code"></i>
-          <h3>ML Engineering</h3>
-          <p>Skilled in building end-to-end machine learning pipelines, from data preprocessing to model deployment, with a focus on scalability and production readiness.</p>
-        </div>
-        <div class="expertise-card fade-in" data-aos="fade-up">
-          <i class="fas fa-chalkboard-teacher"></i>
-          <h3>Data Science Education</h3>
-          <p>Developed comprehensive curricula and interactive learning experiences that combine theoretical foundations with hands-on projects.</p>
-        </div>
-        <div class="expertise-card fade-in" data-aos="fade-up">
-          <i class="fas fa-project-diagram"></i>
-          <h3>Research &amp; Innovation</h3>
-          <p>Leading research initiatives to develop novel algorithms and approaches for solving complex data science challenges.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+        <section id="hero" class="relative flex flex-col md:flex-row items-center justify-between min-h-[calc(100vh-68px)] overflow-hidden">
+             <div id="tsparticles"></div>
+            <div class="container relative z-10 mx-auto px-6 py-16 md:py-24 flex flex-col md:flex-row items-center justify-between w-full">
+                <div class="md:w-3/5 text-center md:text-left mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-dark mb-4 leading-tight">
+                        Hi, I'm Farhan Siddiqui
+                    </h1>
+                    <p class="text-xl md:text-2xl text-gray-800 mb-6 font-medium">
+                        Expert Educator in Data Science, AI, Cybersecurity & Web Development
+                    </p>
+                    <p class="text-lg text-gray-700 mb-8">
+                        Transforming complex concepts into practical skills. Specializing in Data Analysis, Computer Vision, Deep Learning, Cybersecurity, and Django development.
+                    </p>
+                    <div class="flex justify-center md:justify-start space-x-4">
+                        <a href="#projects" class="bg-primary text-white px-6 py-3 rounded-md hover:bg-primary-hover transition duration-300 font-medium shadow-lg">View My Work</a>
+                        <a href="#contact" class="bg-gray-200 text-dark px-6 py-3 rounded-md hover:bg-gray-300 transition duration-300 font-medium">Get In Touch</a>
+                    </div>
+                </div>
+                <div class="md:w-2/5 flex justify-center">
+                    <img src="https://placehold.co/400x400/e2e8f0/64748b?text=Your+Photo" alt="Farhan Siddiqui" class="rounded-full shadow-xl w-60 h-60 md:w-72 md:h-72 lg:w-80 lg:h-80 object-cover border-4 border-white">
+                </div>
+            </div>
+        </section>
 
-  <!-- Projects Section -->
-  <section id="projects" class="section">
-    <div class="container">
-      <h2 class="section-title fade-in" data-aos="fade-up">Featured Projects</h2>
-      <div class="projects-grid">
-        <div class="project-card fade-in" data-aos="fade-up">
-          <div class="project-image">
-            <img src="/api/placeholder/600/400" alt="Medical Imaging AI" />
-          </div>
-          <div class="project-info">
-            <h3>Medical Imaging AI</h3>
-            <p>Deep learning system for early detection of diabetic retinopathy from retinal scans, achieving 94% accuracy on par with specialist ophthalmologists.</p>
-            <div class="project-tags">
-              <span class="tag">Computer Vision</span>
-              <span class="tag">Healthcare</span>
-              <span class="tag">TensorFlow</span>
-              <span class="tag">CNN</span>
-            </div>
-            <div class="project-links">
-              <a href="#" class="live-demo">Case Study</a>
-              <a href="#" class="source-code">GitHub</a>
-            </div>
-          </div>
-        </div>
-        <div class="project-card fade-in" data-aos="fade-up">
-          <div class="project-image">
-            <img src="/api/placeholder/600/400" alt="Smart Agriculture" />
-          </div>
-          <div class="project-info">
-            <h3>Smart Agriculture System</h3>
-            <p>Computer vision-based crop monitoring system that detects diseases, pests, and nutrient deficiencies in real-time, reducing crop losses by 30%.</p>
-            <div class="project-tags">
-              <span class="tag">PyTorch</span>
-              <span class="tag">IoT</span>
-              <span class="tag">Agriculture</span>
-              <span class="tag">Edge Computing</span>
-            </div>
-            <div class="project-links">
-              <a href="#" class="live-demo">Demo</a>
-              <a href="#" class="source-code">GitHub</a>
-            </div>
-          </div>
-        </div>
-        <div class="project-card fade-in" data-aos="fade-up">
-          <div class="project-image">
-            <img src="/api/placeholder/600/400" alt="Traffic Analysis" />
-          </div>
-          <div class="project-info">
-            <h3>Urban Traffic Analysis</h3>
-            <p>Real-time traffic monitoring and prediction system using computer vision and time series forecasting, improving traffic flow efficiency by 25% in pilot cities.</p>
-            <div class="project-tags">
-              <span class="tag">Computer Vision</span>
-              <span class="tag">Time Series</span>
-              <span class="tag">Smart Cities</span>
-              <span class="tag">LSTM</span>
-            </div>
-            <div class="project-links">
-              <a href="#" class="live-demo">Case Study</a>
-              <a href="#" class="source-code">GitHub</a>
-            </div>
-          </div>
-        </div>
-        <div class="project-card fade-in" data-aos="fade-up">
-          <div class="project-image">
-            <img src="/api/placeholder/600/400" alt="Retail Analytics" />
-          </div>
-          <div class="project-info">
-            <h3>Retail Analytics Platform</h3>
-            <p>End-to-end customer behavior analytics system for retail environments, combining computer vision for foot traffic analysis with transaction data for business insights.</p>
-            <div class="project-tags">
-              <span class="tag">Business Intelligence</span>
-              <span class="tag">Computer Vision</span>
-              <span class="tag">Python</span>
-              <span class="tag">AWS</span>
-            </div>
-            <div class="project-links">
-              <a href="#" class="live-demo">Demo</a>
-              <a href="#" class="source-code">GitHub</a>
-            </div>
-          </div>
-        </div>
-        <div class="project-card fade-in" data-aos="fade-up">
-          <div class="project-image">
-            <img src="/api/placeholder/600/400" alt="NLP Dashboard" />
-          </div>
-          <div class="project-info">
-            <h3>NLP Insights Dashboard</h3>
-            <p>Sentiment analysis and topic modeling dashboard for customer feedback data, helping companies understand and respond to customer needs more effectively.</p>
-            <div class="project-tags">
-              <span class="tag">NLP</span>
-              <span class="tag">Dashboard</span>
-              <span class="tag">Transformers</span>
-              <span class="tag">React</span>
-            </div>
-            <div class="project-links">
-              <a href="#" class="live-demo">Live Demo</a>
-              <a href="#" class="source-code">GitHub</a>
-            </div>
-          </div>
-        </div>
-        <div class="project-card fade-in" data-aos="fade-up">
-          <div class="project-image">
-            <img src="/api/placeholder/600/400" alt="Predictive Maintenance" />
-          </div>
-          <div class="project-info">
-            <h3>Predictive Maintenance AI</h3>
-            <p>Machine learning system for predicting equipment failures in manufacturing environments, reducing downtime by 40% and maintenance costs by 25%.</p>
-            <div class="project-tags">
-              <span class="tag">Time Series</span>
-              <span class="tag">IoT</span>
-              <span class="tag">Manufacturing</span>
-              <span class="tag">Machine Learning</span>
-            </div>
-            <div class="project-links">
-              <a href="#" class="live-demo">Case Study</a>
-              <a href="#" class="source-code">GitHub</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+        <div class="container mx-auto px-6 py-12">
 
-  <!-- Teaching Section -->
-  <section id="teaching" class="section teaching">
-    <div class="container">
-      <h2 class="section-title fade-in" data-aos="fade-up">Teaching Methodology</h2>
-      <div class="methodology-list">
-        <div class="methodology-item fade-in" data-aos="fade-up">
-          <h3>Project-Based Learning</h3>
-          <p>Students learn by working on real-world projects with actual datasets, developing practical skills that translate directly to industry needs.</p>
-        </div>
-        <div class="methodology-item fade-in" data-aos="fade-up">
-          <h3>Flipped Classroom</h3>
-          <p>Theory is covered through pre-recorded lectures and readings, while class time is dedicated to hands-on exercises, discussions, and problem-solving.</p>
-        </div>
-        <div class="methodology-item fade-in" data-aos="fade-up">
-          <h3>Industry Collaboration</h3>
-          <p>Regular involvement of industry partners to provide students with exposure to current challenges and opportunities in the field.</p>
-        </div>
-        <div class="methodology-item fade-in" data-aos="fade-up">
-          <h3>Personalized Mentoring</h3>
-          <p>Tailored guidance for each student based on their background, learning style, and career goals.</p>
-        </div>
-        <div class="methodology-item fade-in" data-aos="fade-up">
-          <h3>Cross-Disciplinary Approach</h3>
-          <p>Integrating knowledge from various domains to solve complex problems, reflecting the multidisciplinary nature of data science.</p>
-        </div>
-        <div class="methodology-item fade-in" data-aos="fade-up">
-          <h3>Continuous Assessment</h3>
-          <p>Regular feedback through code reviews, project milestones, and peer evaluations to ensure continuous improvement.</p>
-        </div>
-      </div>
-      <h3 class="section-title fade-in" style="margin-top: 80px;" data-aos="fade-up">Featured Courses</h3>
-      <div class="courses">
-        <div class="course-item fade-in" data-aos="fade-up">
-          <div class="course-title">
-            <h3>Advanced Computer Vision</h3>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="course-content">
-            <p>Comprehensive exploration of cutting-edge computer vision techniques and their applications. Topics include deep learning for image analysis, 3D vision, video understanding, and deployment strategies for vision systems.</p>
-            <p>Students will implement real-world projects like facial recognition systems, object tracking in videos, and medical image analysis.</p>
-          </div>
-        </div>
-        <div class="course-item fade-in" data-aos="fade-up">
-          <div class="course-title">
-            <h3>Machine Learning for Business Analytics</h3>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="course-content">
-            <p>Practical application of machine learning techniques to solve business problems. Focus on customer segmentation, demand forecasting, recommendation systems, and anomaly detection.</p>
-            <p>Includes case studies from retail, finance, healthcare, and marketing domains.</p>
-          </div>
-        </div>
-        <div class="course-item fade-in" data-aos="fade-up">
-          <div class="course-title">
-            <h3>Deep Learning Fundamentals &amp; Applications</h3>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="course-content">
-            <p>In-depth exploration of neural network architectures, training methodologies, and implementation best practices. Covers CNNs, RNNs, transformers, and generative models.</p>
-            <p>Students will build and deploy models for image recognition, natural language processing, and time series forecasting.</p>
-          </div>
-        </div>
-        <div class="course-item fade-in" data-aos="fade-up">
-          <div class="course-title">
-            <h3>Big Data Systems &amp; Analytics</h3>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="course-content">
-            <p>Comprehensive coverage of big data technologies and analytical techniques. Includes Hadoop, Spark, distributed computing, and cloud-based data solutions.</p>
-            <p>Focuses on scalable data processing, real-time analytics, and building end-to-end data pipelines.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+            <section id="about" class="py-16 bg-white rounded-lg shadow-sm scroll-mt-20">
+                 <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-dark mb-2">About Me</h2>
+                    <p class="text-lg text-gray-600">Bridging theory and practice across technology domains.</p>
+                    <div class="w-20 h-1 bg-primary mx-auto mt-4 rounded"></div>
+                </div>
+                <div class="max-w-4xl mx-auto text-center text-gray-700 space-y-4 leading-relaxed">
+                    <p>
+                        I am a passionate educator and technologist with deep expertise spanning Data Science, Data Analysis, Artificial Intelligence (specializing in Computer Vision and Deep Learning), Cybersecurity, and Full-Stack Web Development with Django.
+                    </p>
+                    <p>
+                        My professional journey involves not only developing and deploying cutting-edge solutions but also empowering the next generation of tech professionals. I focus on hands-on teaching methodologies, real-world case studies, and fostering a strong foundational understanding in my students. Whether it's analyzing complex datasets, securing digital infrastructures, building intelligent systems, or crafting robust web applications, I am committed to excellence and practical application.
+                    </p>
+                </div>
+            </section>
 
-  <!-- Experience Section -->
-  <section id="experience" class="section">
-    <div class="container">
-      <h2 class="section-title fade-in" data-aos="fade-up">Professional Experience</h2>
-      <div class="experience-timeline" data-aos="zoom-in-up">
-        <div class="timeline-item fade-in" data-aos="zoom-in-up">
-          <div class="timeline-content" data-aos="zoom-in-up">
-            <h3>Senior Data Science Faculty</h3>
-            <span class="date">2019 - Present</span>
-            <p>Leading the development and delivery of graduate-level data science courses, mentoring students, and conducting research in computer vision applications.</p>
-            <p>Established industry partnerships resulting in 30+ internship opportunities and 15+ collaborative research projects.</p>
-          </div>
+            <section id="skills" class="py-16 scroll-mt-20">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-dark mb-2">Areas of Expertise</h2>
+                    <p class="text-lg text-gray-600">Key technologies and domains I work with and teach.</p>
+                     <div class="w-20 h-1 bg-primary mx-auto mt-4 rounded"></div>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 text-center">
+                    <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition duration-300 flex flex-col items-center">
+                        <img src="https://placehold.co/64x64/1e40af/ffffff?text=DS" alt="Data Science Icon" class="mx-auto mb-4 w-16 h-16 rounded-full">
+                        <h3 class="text-lg font-semibold text-dark mb-2">Data Science</h3>
+                        <p class="text-gray-600 text-sm">Machine Learning, Statistics, Modeling, Python (NumPy, Pandas, Scikit-learn).</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition duration-300 flex flex-col items-center">
+                        <img src="https://placehold.co/64x64/1e40af/ffffff?text=DA" alt="Data Analysis Icon" class="mx-auto mb-4 w-16 h-16 rounded-full">
+                        <h3 class="text-lg font-semibold text-dark mb-2">Data Analysis</h3>
+                        <p class="text-gray-600 text-sm">Data Visualization (Matplotlib, Seaborn, Plotly), SQL, Excel, Reporting.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition duration-300 flex flex-col items-center">
+                        <img src="https://placehold.co/64x64/1e40af/ffffff?text=CV" alt="Computer Vision Icon" class="mx-auto mb-4 w-16 h-16 rounded-full">
+                        <h3 class="text-lg font-semibold text-dark mb-2">Computer Vision</h3>
+                        <p class="text-gray-600 text-sm">Object Detection, Image Recognition, Segmentation, OpenCV.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition duration-300 flex flex-col items-center">
+                         <img src="https://placehold.co/64x64/1e40af/ffffff?text=DL" alt="Deep Learning Icon" class="mx-auto mb-4 w-16 h-16 rounded-full">
+                        <h3 class="text-lg font-semibold text-dark mb-2">Deep Learning</h3>
+                        <p class="text-gray-600 text-sm">CNNs, RNNs, Transformers, TensorFlow, PyTorch.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition duration-300 flex flex-col items-center">
+                         <img src="https://placehold.co/64x64/1e40af/ffffff?text=SEC" alt="Cybersecurity Icon" class="mx-auto mb-4 w-16 h-16 rounded-full">
+                        <h3 class="text-lg font-semibold text-dark mb-2">Cybersecurity</h3>
+                        <p class="text-gray-600 text-sm">Network Security, Ethical Hacking Concepts, Risk Assessment, Security Tools.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition duration-300 flex flex-col items-center">
+                         <img src="https://placehold.co/64x64/1e40af/ffffff?text=DJ" alt="Django Icon" class="mx-auto mb-4 w-16 h-16 rounded-full">
+                        <h3 class="text-lg font-semibold text-dark mb-2">Django Development</h3>
+                        <p class="text-gray-600 text-sm">Full-Stack Web Apps, REST APIs, ORM, Python Web Frameworks.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition duration-300 flex flex-col items-center">
+                         <img src="https://placehold.co/64x64/1e40af/ffffff?text=ML" alt="ML Engineering Icon" class="mx-auto mb-4 w-16 h-16 rounded-full">
+                        <h3 class="text-lg font-semibold text-dark mb-2">ML Engineering</h3>
+                        <p class="text-gray-600 text-sm">MLOps, Model Deployment, Cloud Platforms (AWS, GCP, Azure).</p>
+                    </div>
+                     <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition duration-300 flex flex-col items-center">
+                          <img src="https://placehold.co/64x64/1e40af/ffffff?text=Edu" alt="Teaching Icon" class="mx-auto mb-4 w-16 h-16 rounded-full">
+                         <h3 class="text-lg font-semibold text-dark mb-2">Teaching & Mentoring</h3>
+                         <p class="text-gray-600 text-sm">Curriculum Design, Training Delivery, Project Guidance.</p>
+                     </div>
+                </div>
+            </section>
+
+            <section id="projects" class="py-16 bg-white rounded-lg shadow-sm scroll-mt-20">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-dark mb-2">Featured Projects</h2>
+                    <p class="text-lg text-gray-600">Examples of applications and analyses across domains.</p>
+                     <div class="w-20 h-1 bg-primary mx-auto mt-4 rounded"></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-light rounded-lg shadow-sm overflow-hidden group border border-gray-200 hover:shadow-lg transition duration-300">
+                        <img src="https://placehold.co/600x400/d1d5db/1f2937?text=AI/CV+Project" alt="AI Project Thumbnail" class="w-full h-48 object-cover group-hover:opacity-90 transition duration-300">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-dark mb-3">AI/Computer Vision Project</h3>
+                            <p class="text-gray-600 mb-4 text-sm">E.g., Real-time object detection system for smart city surveillance or medical image analysis tool.</p>
+                            <div class="flex space-x-3">
+                                <a href="#" target="_blank" rel="noopener noreferrer" class="text-sm text-primary hover:underline flex items-center">
+                                    <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/github.svg" alt="GitHub" class="w-4 h-4 mr-1 inline-block"> GitHub
+                                </a>
+                                <a href="#" target="_blank" rel="noopener noreferrer" class="text-sm text-secondary hover:underline flex items-center">
+                                     <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/external-link.svg" alt="Demo" class="w-4 h-4 mr-1 inline-block"> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-light rounded-lg shadow-sm overflow-hidden group border border-gray-200 hover:shadow-lg transition duration-300">
+                        <img src="https://placehold.co/600x400/d1d5db/1f2937?text=Data+Analysis+Report" alt="Data Analysis Project Thumbnail" class="w-full h-48 object-cover group-hover:opacity-90 transition duration-300">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-dark mb-3">Data Analysis & Visualization</h3>
+                            <p class="text-gray-600 mb-4 text-sm">E.g., Interactive dashboard analyzing sales trends or a report on market research findings using Python/SQL.</p>
+                             <div class="flex space-x-3">
+                                <a href="#" target="_blank" rel="noopener noreferrer" class="text-sm text-primary hover:underline flex items-center">
+                                    <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/github.svg" alt="GitHub" class="w-4 h-4 mr-1 inline-block"> GitHub
+                                </a>
+                                <a href="#" target="_blank" rel="noopener noreferrer" class="text-sm text-secondary hover:underline flex items-center">
+                                     <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/file-text.svg" alt="Report" class="w-4 h-4 mr-1 inline-block"> View Report
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-light rounded-lg shadow-sm overflow-hidden group border border-gray-200 hover:shadow-lg transition duration-300">
+                        <img src="https://placehold.co/600x400/d1d5db/1f2937?text=Django+Web+App" alt="Django Project Thumbnail" class="w-full h-48 object-cover group-hover:opacity-90 transition duration-300">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-dark mb-3">Django Web Application</h3>
+                            <p class="text-gray-600 mb-4 text-sm">E.g., A custom e-learning platform, a RESTful API service, or a content management system.</p>
+                             <div class="flex space-x-3">
+                                <a href="#" target="_blank" rel="noopener noreferrer" class="text-sm text-primary hover:underline flex items-center">
+                                    <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/github.svg" alt="GitHub" class="w-4 h-4 mr-1 inline-block"> GitHub
+                                </a>
+                                 <a href="#" target="_blank" rel="noopener noreferrer" class="text-sm text-secondary hover:underline flex items-center">
+                                     <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/external-link.svg" alt="Live Site" class="w-4 h-4 mr-1 inline-block"> Live Site
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="bg-light rounded-lg shadow-sm overflow-hidden group border border-gray-200 hover:shadow-lg transition duration-300">
+                        <img src="https://placehold.co/600x400/d1d5db/1f2937?text=Cybersecurity+Tool" alt="Cybersecurity Project Thumbnail" class="w-full h-48 object-cover group-hover:opacity-90 transition duration-300">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-dark mb-3">Cybersecurity Project/Tool</h3>
+                            <p class="text-gray-600 mb-4 text-sm">E.g., Development of a network scanning tool, a vulnerability assessment report, or a secure coding guideline.</p>
+                             <div class="flex space-x-3">
+                                <a href="#" target="_blank" rel="noopener noreferrer" class="text-sm text-primary hover:underline flex items-center">
+                                    <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/github.svg" alt="GitHub" class="w-4 h-4 mr-1 inline-block"> GitHub
+                                </a>
+                                <a href="#" target="_blank" rel="noopener noreferrer" class="text-sm text-secondary hover:underline flex items-center">
+                                     <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/book-open-text.svg" alt="Case Study" class="w-4 h-4 mr-1 inline-block"> Case Study
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+             <section id="experience" class="py-16 scroll-mt-20">
+                 <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-dark mb-2">Professional Experience</h2>
+                    <p class="text-lg text-gray-600">My career journey in technology and education.</p>
+                     <div class="w-20 h-1 bg-primary mx-auto mt-4 rounded"></div>
+                </div>
+                <div class="max-w-3xl mx-auto space-y-8">
+                    <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-primary transition-shadow duration-300 hover:shadow-md">
+                        <h3 class="text-xl font-semibold text-dark mb-1">Senior Faculty & Technologist</h3>
+                        <p class="text-gray-500 text-sm mb-2">Institution/Company Name | Surat, Gujarat | Start Date - Present</p>
+                        <ul class="list-disc list-inside text-gray-700 text-sm space-y-1">
+                            <li>Lead instructor for courses in Data Science, AI, CV, DL, Cybersecurity, and Django.</li>
+                            <li>Develop and update curricula based on industry trends.</li>
+                            <li>Mentor students and professionals on real-world projects.</li>
+                            <li>Consult on and develop solutions in areas of expertise.</li>
+                        </ul>
+                    </div>
+                     <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-secondary transition-shadow duration-300 hover:shadow-md">
+                        <h3 class="text-xl font-semibold text-dark mb-1">Previous Role (e.g., Data Scientist / Developer)</h3>
+                        <p class="text-gray-500 text-sm mb-2">Company Name | City, Country | Start Date - End Date</p>
+                         <ul class="list-disc list-inside text-gray-700 text-sm space-y-1">
+                            <li>Describe key responsibilities and achievements in this role.</li>
+                            <li>Example: Built predictive models for [specific business problem].</li>
+                            <li>Example: Developed and maintained [specific web application/system].</li>
+                             <li>Example: Implemented security protocols for [specific system].</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="teaching" class="py-16 bg-white rounded-lg shadow-sm scroll-mt-20">
+                 <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-dark mb-2">Teaching & Courses</h2>
+                    <p class="text-lg text-gray-600">Empowering learners with practical, in-demand skills.</p>
+                     <div class="w-20 h-1 bg-primary mx-auto mt-4 rounded"></div>
+                </div>
+                 <div class="max-w-3xl mx-auto text-gray-700 space-y-6">
+                     <div>
+                         <h3 class="text-xl font-semibold text-dark mb-2 text-center md:text-left">Teaching Philosophy</h3>
+                         <p class="text-center md:text-left">My teaching centers on practical application, hands-on labs, and real-world case studies. I strive to demystify complex topics and equip learners with the skills needed to succeed in the tech industry, fostering critical thinking and problem-solving abilities.</p>
+                     </div>
+                     <div>
+                         <h3 class="text-xl font-semibold text-dark mb-3 text-center md:text-left">Featured Course Areas</h3>
+                         <ul class="list-disc list-inside space-y-1 columns-1 md:columns-2">
+                             <li>Data Science Fundamentals & Advanced ML</li>
+                             <li>Data Analysis and Visualization Techniques</li>
+                             <li>Computer Vision with Deep Learning</li>
+                             <li>Cybersecurity Essentials & Ethical Hacking</li>
+                             <li>Full-Stack Web Development with Django</li>
+                             <li>Applied AI and ML Engineering (MLOps)</li>
+                             <li>Big Data Technologies Overview</li>
+                         </ul>
+                     </div>
+                </div>
+            </section>
+
+
+            <section id="contact" class="py-16 scroll-mt-20">
+                 <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-dark mb-2">Get In Touch</h2>
+                    <p class="text-lg text-gray-600">Let's connect! I'm open to collaborations, consultations, and opportunities.</p>
+                     <div class="w-20 h-1 bg-primary mx-auto mt-4 rounded"></div>
+                </div>
+                <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div class="bg-white p-8 rounded-lg shadow-md order-2 md:order-1">
+                        <h3 class="text-xl font-semibold text-dark mb-6">Send me a message</h3>
+                        <form action="#" method="POST" class="space-y-4">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                                <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary text-sm" placeholder="Your Name">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                                <input type="email" id="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary text-sm" placeholder="Your Email">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                                <textarea id="message" name="message" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary text-sm" placeholder="Your message..."></textarea>
+                            </div>
+                            <div>
+                                <button type="submit" class="w-full bg-primary text-white px-6 py-3 rounded-md hover:bg-primary-hover transition duration-300 font-medium shadow-md">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="space-y-6 order-1 md:order-2">
+                         <div class="bg-white p-6 rounded-lg shadow-sm flex items-start space-x-4 transition-shadow duration-300 hover:shadow-md">
+                             <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/mail.svg" alt="Email" class="w-6 h-6 text-primary mt-1 flex-shrink-0">
+                             <div>
+                                 <h4 class="font-semibold text-dark">Email</h4>
+                                 <a href="mailto:your.email@example.com" class="text-primary hover:underline break-all">your.email@example.com</a>
+                                 <p class="text-sm text-gray-500 mt-1">Preferred contact method</p>
+                             </div>
+                         </div>
+                         <div class="bg-white p-6 rounded-lg shadow-sm flex items-start space-x-4 transition-shadow duration-300 hover:shadow-md">
+                             <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/map-pin.svg" alt="Location" class="w-6 h-6 text-primary mt-1 flex-shrink-0">
+                             <div>
+                                 <h4 class="font-semibold text-dark">Location</h4>
+                                 <p class="text-gray-700">Surat, Gujarat, India</p>
+                                 <p class="text-sm text-gray-500 mt-1">Available for remote work & local consultations</p>
+                             </div>
+                         </div>
+                         <div class="bg-white p-6 rounded-lg shadow-sm transition-shadow duration-300 hover:shadow-md">
+                             <h4 class="font-semibold text-dark mb-3">Connect Online</h4>
+                             <div class="flex space-x-4">
+                                 <a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-primary transition duration-300" title="LinkedIn">
+                                     <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/linkedin.svg" alt="LinkedIn" class="w-6 h-6">
+                                     <span class="sr-only">LinkedIn</span>
+                                 </a>
+                                 <a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-primary transition duration-300" title="GitHub">
+                                     <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/github.svg" alt="GitHub" class="w-6 h-6">
+                                     <span class="sr-only">GitHub</span>
+                                 </a>
+                                  <a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-primary transition duration-300" title="Medium Blog (Example)">
+                                     <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/notebook-text.svg" alt="Blog" class="w-6 h-6">
+                                      <span class="sr-only">Blog</span>
+                                 </a>
+                             </div>
+                         </div>
+                    </div>
+                </div>
+            </section>
+        </div> </main>
+
+    <footer class="bg-dark text-gray-400 py-8 mt-16">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-sm">&copy; 2025 Farhan Siddiqui. All rights reserved.</p>
+            <p class="text-xs mt-2">Designed with Tailwind CSS & tsParticles</p>
+             <div class="flex justify-center space-x-4 mt-4">
+                 <a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition duration-300" title="LinkedIn">
+                     <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/linkedin.svg" alt="LinkedIn" class="w-5 h-5">
+                     <span class="sr-only">LinkedIn</span>
+                 </a>
+                 <a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition duration-300" title="GitHub">
+                     <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/github.svg" alt="GitHub" class="w-5 h-5">
+                      <span class="sr-only">GitHub</span>
+                 </a>
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition duration-300" title="Blog">
+                     <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/notebook-text.svg" alt="Blog" class="w-5 h-5">
+                      <span class="sr-only">Blog</span>
+                 </a>
+             </div>
         </div>
-        <div class="timeline-item fade-in" data-aos="zoom-in-left">
-          <div class="timeline-content" data-aos="zoom-in-left">
-            <h3>Lead AI Consultant</h3>
-            <span class="date">2017 - Present</span>
-            <p>Providing expert consultancy services to Fortune 500 companies and startups on AI strategy, implementation, and optimization.</p>
-            <p>Delivered 20+ successful projects across healthcare, retail, finance, and manufacturing sectors.</p>
-          </div>
-        </div>
-        <div class="timeline-item fade-in" data-aos="zoom-in-up">
-          <div class="timeline-content" data-aos="zoom-in-up">
-            <h3>Computer Vision Researcher</h3>
-            <span class="date">2015 - 2019</span>
-            <p>Conducted research on advanced computer vision algorithms for autonomous vehicles and smart city applications.</p>
-            <p>Published 12 papers in top-tier conferences and journals, with 3 patents filed.</p>
-          </div>
-        </div>
-        <div class="timeline-item fade-in" data-aos="zoom-in-up">
-          <div class="timeline-content">
-            <h3>Data Scientist</h3>
-            <span class="date">2012 - 2015</span>
-            <p>Developed predictive models and data-driven solutions for business problems in the retail and e-commerce sectors.</p>
-            <p>Implemented recommendation systems that increased customer engagement by 35% and sales by 28%.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </footer>
 
-  <!-- Contact Section -->
-  <section id="contact" class="section contact">
-    <div class="container">
-      <h2 class="section-title fade-in" data-aos="fade-up">Get In Touch</h2>
-      <div class="contact-content">
-        <div class="contact-info fade-in" data-aos="fade-up">
-          <h3>Let's Connect</h3>
-          <div class="contact-details">
-            <p><i class="fas fa-envelope"></i> contact@drdata.dev</p>
-            <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
-            <p><i class="fas fa-map-marker-alt"></i> San Francisco, CA</p>
-          </div>
-          <h3>Follow Me</h3>
-          <div class="social-links">
-            <a href="#"><i class="fab fa-github"></i></a>
-            <a href="#"><i class="fab fa-linkedin"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-medium"></i></a>
-            <a href="#"><i class="fab fa-youtube"></i></a>
-          </div>
-        </div>
-        <div class="contact-form fade-in" data-aos="fade-up">
-          <form id="contactForm">
-            <div class="form-group">
-              <label for="name">Name</label>
-              <input type="text" id="name" class="form-control" required />
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" class="form-control" required />
-            </div>
-            <div class="form-group">
-              <label for="subject">Subject</label>
-              <input type="text" id="subject" class="form-control" required />
-            </div>
-            <div class="form-group">
-              <label for="message">Message</label>
-              <textarea id="message" class="form-control" required></textarea>
-            </div>
-            <button type="submit" class="btn submit-btn">Send Message</button>
-            <div class="success-message">
-              Message sent successfully! I'll get back to you soon.
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
+    <script>
+        // Mobile Menu Toggle
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
 
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <p>&copy; 2025 . Data | All Rights Reserved</p>
-    </div>
-  </footer>
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
 
-  <!-- Back to Top Button -->
-  <div class="back-to-top">
-    <i class="fas fa-arrow-up"></i>
-  </div>
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                 mobileMenu.classList.add('hidden');
+            });
+        });
 
-  <!-- JavaScript -->
-  <script>
-    // Mobile navigation toggle
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-    });
+        // tsParticles Initialization
+        document.addEventListener('DOMContentLoaded', (event) => {
+            tsParticles.load("tsparticles", {
+                fpsLimit: 60,
+                particles: {
+                    number: {
+                        value: 80,
+                        density: {
+                            enable: true,
+                            value_area: 800
+                        }
+                    },
+                    color: {
+                        // UPDATED: Changed to a slightly more vibrant blue
+                        value: "#2563eb" // Tailwind blue-600
+                    },
+                    shape: {
+                        type: "circle"
+                    },
+                    opacity: {
+                        value: 0.5,
+                        random: true,
+                        anim: {
+                            enable: true,
+                            speed: 0.5,
+                            opacity_min: 0.1,
+                            sync: false
+                        }
+                    },
+                    size: {
+                        value: 3,
+                        random: true,
+                        anim: {
+                            enable: false
+                        }
+                    },
+                    links: {
+                        color: "#6b7280", // Adjusted link color slightly (Tailwind gray-500)
+                        distance: 150,
+                        enable: true,
+                        opacity: 0.4,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 1,
+                        direction: "none",
+                        random: true,
+                        straight: false,
+                        out_mode: "out", // Changed from 'out' - see note below
+                        bounce: false,
+                        attract: {
+                            enable: false
+                        }
+                    }
+                },
+                interactivity: {
+                    detect_on: "canvas", // Detect interactions on the canvas area
+                    events: {
+                        onhover: {
+                            enable: true,
+                            mode: "repulse"
+                        },
+                        onclick: {
+                            enable: true,
+                            mode: "push"
+                        },
+                        resize: true // Ensure particles adapt on resize
+                    },
+                    modes: {
+                        repulse: {
+                            distance: 100,
+                            duration: 0.4
+                        },
+                        push: {
+                            particles_nb: 4
+                        }
+                        // Removed unused modes for brevity
+                    }
+                },
+                detectRetina: true // Improves rendering on high-res displays
+            });
+        });
 
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
-        }
-        // Close mobile menu if open
-        if (navLinks.classList.contains('active')) {
-          navLinks.classList.remove('active');
-        }
-      });
-    });
+    </script>
 
-    // Back to top button
-    const backToTopButton = document.querySelector('.back-to-top');
-    window.addEventListener('scroll', () => {
-      if (window.pageYOffset > 300) {
-        backToTopButton.classList.add('visible');
-      } else {
-        backToTopButton.classList.remove('visible');
-      }
-    });
-    backToTopButton.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // Fade-in animations using IntersectionObserver
-    const fadeElements = document.querySelectorAll('.fade-in');
-    const fadeInObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          fadeInObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
-    fadeElements.forEach(element => fadeInObserver.observe(element));
-
-    // Course accordion toggle
-    const courseItems = document.querySelectorAll('.course-item');
-    courseItems.forEach(item => {
-      const title = item.querySelector('.course-title');
-      title.addEventListener('click', () => {
-        item.classList.toggle('active');
-      });
-    });
-
-    // Contact form submission
-    const contactForm = document.getElementById('contactForm');
-    const successMessage = document.querySelector('.success-message');
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      successMessage.style.display = 'block';
-      contactForm.reset();
-      setTimeout(() => { successMessage.style.display = 'none'; }, 5000);
-    });
-  </script>
-
-  <!-- Particles.js library and initialization -->
-  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-  <script>
-    particlesJS("particles-js", {
-      "particles": {
-        "number": {
-          "value": 120,
-          "density": { "enable": true, "value_area": 1200 }
-        },
-        "color": { "value": "#000000" },
-        "shape": {
-          "type": "circle",
-          "stroke": { "width": 0, "color": "#000000" }
-        },
-        "opacity": { "value": 0.8, "random": false },
-        "size": { "value": 3.5, "random": true },
-        "line_linked": {
-          "enable": true,
-          "distance": 130,
-          "color": "#000000",
-          "opacity": 1,
-          "width": 2.5
-        },
-        "move": {
-          "enable": true,
-          "speed": 3.5,
-          "direction": "none",
-          "random": false,
-          "out_mode": "bounce",
-          "attract": { "enable": true, "rotateX": 4000, "rotateY": 4000 }
-        }
-      },
-      "interactivity": {
-        "detect_on": "canvas",
-        "events": {
-          "onhover": { "enable": true, "mode": "bubble" },
-          "onclick": { "enable": true, "mode": "push" },
-          "resize": true
-        },
-        "modes": {
-          "bubble": { "distance": 200, "size": 6, "duration": 1, "opacity": 1, "speed": 3 },
-          "repulse": { "distance": 150, "duration": 0.4 },
-          "push": { "particles_nb": 4 }
-        }
-      },
-      "retina_detect": true
-    });
-  </script>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init();
-  </script>
 </body>
 </html>
